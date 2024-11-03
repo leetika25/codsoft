@@ -1,0 +1,54 @@
+import datetime
+
+def add_task(task):
+    with open('todo.txt', 'a') as f:
+        f.write(f"{task}\n")
+    print("Task added successfully!")
+
+def view_tasks():
+    with open('todo.txt', 'r') as f:
+        tasks = f.readlines()
+        for i, task in enumerate(tasks, 1):
+            print(f"{i}. {task.strip()}")
+
+def mark_complete(task_number):
+    with open('todo.txt', 'r') as f:
+        tasks = f.readlines()
+    with open('todo.txt', 'w') as f:
+        for i, task in enumerate(tasks, 1):
+            if i != task_number:
+                f.write(task)
+
+def delete_task(task_number):
+    with open('todo.txt', 'r') as f:
+        tasks = f.readlines()
+    with open('todo.txt', 'w') as f:
+        for i, task in enumerate(tasks, 1):
+            if i != task_number:
+                f.write(task)
+
+while True:
+    print("\nTo-Do List App")
+    print("1. Add Task")
+    print("2. View Tasks")
+    print("3. Mark as Complete")
+    print("4. Delete Task")
+    print("5. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == '1':
+        task = input("Enter the task: ")
+        add_task(task)
+    elif choice == '2':
+        view_tasks()
+    elif choice == '3':
+        task_number = int(input("Enter the task number to mark as complete: "))
+        mark_complete(task_number)
+    elif choice == '4':
+        task_number = int(input("Enter the task number to delete: "))
+        delete_task(task_number)
+    elif choice == '5':
+        break
+    else:
+        print("Invalid choice. Please try again.")
